@@ -6,7 +6,19 @@ import { ContentArea } from "./components/ContentArea";
 
 const App = () => {
   // eslint-disable-next-line no-unused-vars
-  const [users, setUsers] = useState([1, 2]);
+  const [employees, setUsers] = useState([
+    {
+      firstName: "Hugo",
+      lastName: "Constant",
+      startDate: "15/05/2021",
+      department: "sales",
+      dateOfBirth: "15/07/1996",
+      street: "Koskenvayla",
+      city: "Jamsa",
+      state: "AK",
+      zipCode: "42300",
+    },
+  ]);
 
   return (
     <ContentArea>
@@ -14,7 +26,7 @@ const App = () => {
         <div className="body">
           <Switch>
             <Route path="/list">
-              <CurrentEmployees />
+              <CurrentEmployees employeeList={employees} />
             </Route>
             <Route path="/">
               <CreateEmployee />
