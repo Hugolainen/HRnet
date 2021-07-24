@@ -1,12 +1,11 @@
 /* eslint-disable react/prop-types */
 import React from "react";
-import { styled } from "../assets/Theme";
+import { TableRow } from "../assets/Theme";
 
 // eslint-disable-next-line react/prop-types
 export const TableItem = ({ employee }) => {
-  console.log(employee);
   return (
-    <TableRow key={employee}>
+    <TableRow isEvenIndex={employee.id % 2 === 0 ? true : false}>
       <td>{employee.firstName}</td>
       <td>{employee.lastName}</td>
       <td>{employee.startDate}</td>
@@ -19,9 +18,3 @@ export const TableItem = ({ employee }) => {
     </TableRow>
   );
 };
-
-const TableRow = styled.tr`
-  :hover {
-    background-color: blue;
-  }
-`;

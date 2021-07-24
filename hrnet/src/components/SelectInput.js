@@ -3,7 +3,7 @@ import { Label, Select } from "../assets/Theme";
 
 // eslint-disable-next-line react/prop-types
 export const SelectInput = ({ label, options, onSetInput }) => {
-  const [value, setValue] = useState();
+  const [value, setValue] = useState("");
 
   return (
     <>
@@ -11,18 +11,23 @@ export const SelectInput = ({ label, options, onSetInput }) => {
       <Select
         value={value}
         name={label}
-        onChange={(e) => {
+        onInput={(e) => {
           setValue(e.target.value);
-          onSetInput(value);
+          onSetInput(e.target.value);
         }}
       >
         {
           // eslint-disable-next-line react/prop-types
-          options.map((option) => (
-            <option key={option.name} value={option.name}>
-              {option.name}
-            </option>
-          ))
+          options.map((option) => {
+            const name = typeof option === "object" ? option.name : option;
+            const value =
+              typeof option === "object" ? option.abbreviation : option;
+            return (
+              <option key={name} value={value}>
+                {name}
+              </option>
+            );
+          })
         }
       </Select>
     </>

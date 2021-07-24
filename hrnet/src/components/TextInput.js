@@ -3,7 +3,7 @@ import { Label, Input } from "../assets/Theme";
 
 // eslint-disable-next-line react/prop-types
 export const TextInput = ({ label, onSetInput }) => {
-  const [value, setValue] = useState();
+  const [value, setValue] = useState("");
 
   return (
     <>

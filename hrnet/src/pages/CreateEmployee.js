@@ -1,88 +1,90 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { styled } from "../assets/Theme";
+/* eslint-disable no-unused-vars */
+import React, { useState } from "react";
+
+import {
+  CreateEmployeeContainer,
+  PageTitle,
+  NavLink,
+  SubTitle,
+  Button,
+} from "../assets/Theme";
 import { TextInput } from "../components/TextInput";
 import { DateInput } from "../components/DateInput";
 import { SelectInput } from "../components/SelectInput";
 import { InputCategory } from "../components/InputCategory";
+import { stateList } from "../assets/data/stateList";
+import { departmentList } from "../assets/data/departmentList";
 
-export const CreateEmployee = () => {
-  const setFirstName = (value) => {
-    console.log(value);
-  };
-  const testOptions = [{ name: "test" }, { name: "test2" }];
+// eslint-disable-next-line react/prop-types
+export const CreateEmployee = ({ createNewEmployee }) => {
+  const [newEmployee, setNewEmployee] = useState({});
 
   return (
     <CreateEmployeeContainer>
       <PageTitle>HRnet</PageTitle>
       <NavLink to="/list"> View Current Employees </NavLink>
       <SubTitle> Create Employee </SubTitle>
-      <TextInput label="First Name" onSetInput={setFirstName} />
-      <TextInput label="Last Name" onSetInput={setFirstName} />
-      <DateInput label="Date of Birth" onSetInput={setFirstName} />
-      <DateInput label="Start Date" onSetInput={setFirstName} />
+      <TextInput
+        label="First Name"
+        onSetInput={(value) => {
+          setNewEmployee({ ...newEmployee, firstName: value });
+        }}
+      />
+      <TextInput
+        label="Last Name"
+        onSetInput={(value) => {
+          setNewEmployee({ ...newEmployee, lastName: value });
+        }}
+      />
+      <DateInput
+        label="Date of Birth"
+        onSetInput={(value) => {
+          setNewEmployee({ ...newEmployee, dateOfBirth: value });
+        }}
+      />
+      <DateInput
+        label="Start Date"
+        onSetInput={(value) => {
+          setNewEmployee({ ...newEmployee, startDate: value });
+        }}
+      />
 
       <InputCategory name="Address">
-        <TextInput label="Street" onSetInput={setFirstName} />
-        <TextInput label="City" onSetInput={setFirstName} />
+        <TextInput
+          label="Street"
+          onSetInput={(value) => {
+            setNewEmployee({ ...newEmployee, street: value });
+          }}
+        />
+        <TextInput
+          label="City"
+          onSetInput={(value) => {
+            setNewEmployee({ ...newEmployee, city: value });
+          }}
+        />
         <SelectInput
           label="State"
-          options={testOptions}
-          onSetInput={setFirstName}
+          options={stateList}
+          onSetInput={(value) => {
+            setNewEmployee({ ...newEmployee, state: value });
+          }}
         />
-        <TextInput label="Zip Code" onSetInput={setFirstName} />
+        <TextInput
+          label="Zip Code"
+          onSetInput={(value) => {
+            setNewEmployee({ ...newEmployee, zipCode: value });
+          }}
+        />
       </InputCategory>
 
       <SelectInput
         label="Department"
-        options={testOptions}
-        onSetInput={setFirstName}
+        options={departmentList}
+        onSetInput={(value) => {
+          setNewEmployee({ ...newEmployee, department: value });
+        }}
       />
-      <Button onClick={setFirstName}> Save </Button>
+      <Button onClick={() => createNewEmployee(newEmployee)}> Save </Button>
     </CreateEmployeeContainer>
   );
 };
-
-const CreateEmployeeContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  max-width: 320px;
-  width: 100%;
-  height: 100%;
-  margin-top: 2rem;
-  padding-left: 1em;
-  padding-right: 1em;
-`;
-
-const PageTitle = styled.h1`
-  font-size: ${(props) => props.theme.fontSizes.title1};
-  text-align: center;
-  padding-bottom: 0.5rem;
-  border-bottom: 1px solid lightgrey;
-  margin-bottom: 1rem;
-  font-weight: bold;
-`;
-
-const SubTitle = styled.h2`
-  font-size: ${(props) => props.theme.fontSizes.title2};
-  text-align: center;
-
-  margin-bottom: 1rem;
-  font-weight: medium;
-`;
-
-const NavLink = styled(Link)`
-  text-align: center;
-  text-decoration: underline;
-  cursor: pointer;
-  color: blue;
-`;
-
-const Button = styled.button`
-  cursor: pointer;
-  background-color: lightgrey;
-  border-radius: 6px;
-  padding: 5px 10px;
-  width: fit-content;
-  align-self: center;
-`;

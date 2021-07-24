@@ -1,7 +1,13 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import React, { useState } from "react";
-import { styled } from "../assets/Theme";
+import {
+  TableContainer,
+  StyledTable,
+  TableHeader,
+  TableHeaderCell,
+  TableBody,
+} from "../assets/Theme";
 import { TableItem } from "./TableItem";
 
 // eslint-disable-next-line react/prop-types
@@ -15,11 +21,9 @@ export const Table = (employeeList) => {
         //.filter(pot => itemMatchesFilter(pot, potStatusFilter, slagStatusFilter, slagTypeFilter))  //Keep as template
         .map((employee) => (
           // eslint-disable-next-line react/jsx-key
-          <TableItem key={employee.name} employee={employee} />
+          <TableItem key={employee.id} employee={employee} />
         ))
     : [];
-
-  console.log(children);
   return (
     <TableContainer>
       <StyledTable>
@@ -39,29 +43,3 @@ export const Table = (employeeList) => {
     </TableContainer>
   );
 };
-
-const TableContainer = styled.div``;
-
-const StyledTable = styled.table`
-  width: 100%;
-  font-size: 14px;
-  color: black;
-  border-bottom: 1px solid grey;
-  border-spacing: 0px;
-`;
-
-const TableHeader = styled.tr`
-  color: blue;
-  background-color: white;
-  font-weight: bold;
-`;
-
-const TableHeaderCell = styled.th`
-  cursor: pointer;
-  border-bottom: 1px solid grey;
-`;
-
-const TableBody = styled.tbody`
-  background-color: lightgrey;
-  color: black;
-`;

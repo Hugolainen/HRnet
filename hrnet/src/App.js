@@ -5,20 +5,25 @@ import { CurrentEmployees } from "./pages/CurrentEmployees";
 import { ContentArea } from "./components/ContentArea";
 
 const App = () => {
-  // eslint-disable-next-line no-unused-vars
-  const [employees, setUsers] = useState([
-    {
-      firstName: "Hugo",
-      lastName: "Constant",
-      startDate: "15/05/2021",
-      department: "sales",
-      dateOfBirth: "15/07/1996",
-      street: "Koskenvayla",
-      city: "Jamsa",
-      state: "AK",
-      zipCode: "42300",
-    },
-  ]);
+  const [employeeList, setEmployeeList] = useState([]);
+
+  const onCreateNewEmployee = (newEmployee) => {
+    const newList = employeeList;
+    const employeeToCreate = {
+      id: employeeList.length,
+      firstName: newEmployee.firstName ? newEmployee.firstName : "",
+      lastName: newEmployee.lastName ? newEmployee.lastName : "",
+      startDate: newEmployee.startDate ? newEmployee.startDate : "",
+      department: newEmployee.department ? newEmployee.department : "",
+      dateOfBirth: newEmployee.dateOfBirth ? newEmployee.dateOfBirth : "",
+      street: newEmployee.street ? newEmployee.street : "",
+      city: newEmployee.city ? newEmployee.city : "",
+      zipCode: newEmployee.zipCode ? newEmployee.zipCode : "",
+    };
+
+    newList.push(employeeToCreate);
+    setEmployeeList(newList);
+  };
 
   return (
     <ContentArea>
@@ -26,10 +31,10 @@ const App = () => {
         <div className="body">
           <Switch>
             <Route path="/list">
-              <CurrentEmployees employeeList={employees} />
+              <CurrentEmployees employeeList={employeeList} />
             </Route>
             <Route path="/">
-              <CreateEmployee />
+              <CreateEmployee createNewEmployee={onCreateNewEmployee} />
             </Route>
           </Switch>
         </div>
