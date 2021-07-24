@@ -1,25 +1,28 @@
 import React, { useState } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { CreateEmployee } from "./pages/CreateEmployee";
+import { CurrentEmployees } from "./pages/CurrentEmployees";
+import { ContentArea } from "./components/ContentArea";
 
 const App = () => {
   // eslint-disable-next-line no-unused-vars
   const [users, setUsers] = useState([1, 2]);
 
   return (
-    <div className="App">
+    <ContentArea>
       <BrowserRouter>
         <div className="body">
           <Switch>
-            <Route path="/">
-              <div> user form {users} </div>
-            </Route>
             <Route path="/list">
-              <div> user list </div>
+              <CurrentEmployees />
+            </Route>
+            <Route path="/">
+              <CreateEmployee />
             </Route>
           </Switch>
         </div>
       </BrowserRouter>
-    </div>
+    </ContentArea>
   );
 };
 

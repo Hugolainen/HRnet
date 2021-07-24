@@ -46,15 +46,15 @@ export const theme = {
     ubuntu: themeFonts.ubuntu,
   },
   fontSizes: {
-    small: "1em",
-    medium: "2em",
-    large: "3em",
     text: "14px",
     title: "36px",
-    title2: "30px",
-    title3: "24px",
+    title2: "24px",
+
     tableHeader: "14px",
     tableBody: "13px",
+
+    label: "14px",
+    input: "14px",
   },
   containerSizes: {
     table: "1000px",
@@ -75,5 +75,37 @@ export const GlobalStyle = createGlobalStyle`
     font-family: -apple-system, BlinkMacSystemFont, 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+`;
+
+export const Label = styled.label`
+  margin-bottom: 5px;
+  font-weight: bold;
+  font-size: ${(props) => props.theme.fontSizes.label};
+`;
+
+export const Input = styled.input`
+  margin-bottom: 10px;
+  padding: 5px;
+  border: 1px solid grey;
+  border-radius: 5px;
+
+  :focus {
+    outline: 0;
+    box-shadow: 0 3px 1px -2px rgb(0 0 0 / 20%), 0 2px 2px 0 rgb(0 0 0 / 14%),
+      0 1px 5px 0 rgb(0 0 0 / 12%);
+  }
+`;
+
+export const Select = styled.select`
+  margin-bottom: 10px;
+  padding: 5px;
+  border-color: grey;
+  border-radius: 5px;
+
+  :focus {
+    outline: 0;
+    box-shadow: 0 3px 1px -2px rgb(0 0 0 / 20%), 0 2px 2px 0 rgb(0 0 0 / 14%),
+      0 1px 5px 0 rgb(0 0 0 / 12%);
   }
 `;
