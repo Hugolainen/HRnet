@@ -9,7 +9,6 @@ import {
   Button,
 } from "../assets/Theme";
 import { TextInput } from "../components/TextInput";
-import { DateInput } from "../components/DateInput";
 import { SelectInput } from "../components/SelectInput";
 import { InputCategory } from "../components/InputCategory";
 import { stateList } from "../assets/data/stateList";
@@ -26,24 +25,28 @@ export const CreateEmployee = ({ createNewEmployee }) => {
       <SubTitle> Create Employee </SubTitle>
       <TextInput
         label="First Name"
+        type="text"
         onSetInput={(value) => {
           setNewEmployee({ ...newEmployee, firstName: value });
         }}
       />
       <TextInput
         label="Last Name"
+        type="text"
         onSetInput={(value) => {
           setNewEmployee({ ...newEmployee, lastName: value });
         }}
       />
-      <DateInput
+      <TextInput
         label="Date of Birth"
+        type="date"
         onSetInput={(value) => {
           setNewEmployee({ ...newEmployee, dateOfBirth: value });
         }}
       />
-      <DateInput
+      <TextInput
         label="Start Date"
+        type="date"
         onSetInput={(value) => {
           setNewEmployee({ ...newEmployee, startDate: value });
         }}
@@ -52,12 +55,14 @@ export const CreateEmployee = ({ createNewEmployee }) => {
       <InputCategory name="Address">
         <TextInput
           label="Street"
+          type="text"
           onSetInput={(value) => {
             setNewEmployee({ ...newEmployee, street: value });
           }}
         />
         <TextInput
           label="City"
+          type="text"
           onSetInput={(value) => {
             setNewEmployee({ ...newEmployee, city: value });
           }}
@@ -71,6 +76,7 @@ export const CreateEmployee = ({ createNewEmployee }) => {
         />
         <TextInput
           label="Zip Code"
+          type="number"
           onSetInput={(value) => {
             setNewEmployee({ ...newEmployee, zipCode: value });
           }}
@@ -84,7 +90,7 @@ export const CreateEmployee = ({ createNewEmployee }) => {
           setNewEmployee({ ...newEmployee, department: value });
         }}
       />
-      <Button onClick={() => createNewEmployee(newEmployee)}> Save </Button>
+      <Button onClick={() => createNewEmployee(newEmployee)}>Save</Button>
     </CreateEmployeeContainer>
   );
 };

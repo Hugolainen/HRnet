@@ -28,15 +28,17 @@ export const Table = (employeeList) => {
     <TableContainer>
       <StyledTable>
         <TableHeader>
-          <TableHeaderCell>First Name</TableHeaderCell>
-          <TableHeaderCell>Last Name</TableHeaderCell>
-          <TableHeaderCell>Start Date</TableHeaderCell>
-          <TableHeaderCell>Department</TableHeaderCell>
-          <TableHeaderCell>Date of Birth</TableHeaderCell>
-          <TableHeaderCell>Street</TableHeaderCell>
-          <TableHeaderCell>City</TableHeaderCell>
-          <TableHeaderCell>State</TableHeaderCell>
-          <TableHeaderCell>Zip Code</TableHeaderCell>
+          <tr>
+            <TableHeaderCell>First Name</TableHeaderCell>
+            <TableHeaderCell>Last Name</TableHeaderCell>
+            <TableHeaderCell>Start Date</TableHeaderCell>
+            <TableHeaderCell>Department</TableHeaderCell>
+            <TableHeaderCell>Date of Birth</TableHeaderCell>
+            <TableHeaderCell>Street</TableHeaderCell>
+            <TableHeaderCell>City</TableHeaderCell>
+            <TableHeaderCell>State</TableHeaderCell>
+            <TableHeaderCell>Zip Code</TableHeaderCell>
+          </tr>
         </TableHeader>
         <TableBody>{children}</TableBody>
       </StyledTable>

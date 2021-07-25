@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { Label, Select } from "../assets/Theme";
+import { Label, Select, InputContainer } from "../assets/Theme";
 
 // eslint-disable-next-line react/prop-types
 export const SelectInput = ({ label, options, onSetInput }) => {
   const [value, setValue] = useState("");
 
   return (
-    <>
+    <InputContainer>
       <Label htmlFor={label}>{label}</Label>
       <Select
         value={value}
@@ -30,6 +30,6 @@ export const SelectInput = ({ label, options, onSetInput }) => {
           })
         }
       </Select>
-    </>
+    </InputContainer>
   );
 };

@@ -14,8 +14,9 @@ const themeColors = {
   bayOfMany: "#23527C",
   foam: "#e7fafd",
 
-  grey200: "rgb(200, 200, 200)",
-  grey230: "rgb(230, 230, 230)",
+  grey235: "rgb(235, 235, 235)",
+  grey240: "rgb(240, 240, 240)",
+  grey250: "rgb(250, 250, 250)",
 };
 
 export const theme = {
@@ -41,9 +42,12 @@ export const theme = {
 
     tableHeaderText: themeColors.robinEggBlue,
     tableBodyText: themeColors.secondaryGrey,
-    tableBg1: themeColors.grey230,
-    tableBg2: themeColors.grey200,
-    tableHoverBg: themeColors.grey200,
+    tableRowBg1: "white",
+    tableRowBg2: themeColors.grey240,
+    tableRowFirstCellBg1: themeColors.grey250,
+    tableRowFirstCellBg2: themeColors.grey235,
+    tableRowHoverBg: themeColors.primaryBlue,
+    tableRowFirstCellHoverBg: themeColors.robinEggBlue,
     tableBorder: themeColors.secondaryGrey,
   },
   fonts: {
@@ -88,6 +92,7 @@ export const GlobalStyle = createGlobalStyle`
 export const CreateEmployeeContainer = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   max-width: ${(props) => props.theme.containerSizes.form};
   width: 100%;
   height: 100%;
@@ -141,6 +146,13 @@ export const NavLink = styled(Link)`
 /*
  * Inputs
  */
+export const InputContainer = styled.div`
+  margin: 5px auto;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+`;
+
 export const Label = styled.label`
   margin-bottom: 5px;
   font-weight: bold;
@@ -180,8 +192,10 @@ export const Button = styled.button`
   padding: 5px 10px;
   width: fit-content;
   align-self: center;
-  border: 1px solid ${(props) => props.theme.colors.buttonBorder};
+  border: 2px solid ${(props) => props.theme.colors.buttonBorder};
   color: ${(props) => props.theme.colors.buttonFont};
+  font-weight: bold;
+  font-size: 20px;
   :hover {
     background-color: ${(props) => props.theme.colors.buttonHoverBg};
     border-color: ${(props) => props.theme.colors.buttonHoverBorder};
@@ -201,7 +215,7 @@ export const StyledTable = styled.table`
   border-spacing: 0px;
 `;
 
-export const TableHeader = styled.tr`
+export const TableHeader = styled.thead`
   font-size: ${(props) => props.theme.fontSizes.tableHeader};
   color: ${(props) => props.theme.colors.tableHeaderText};
   background-color: white;
@@ -210,26 +224,36 @@ export const TableHeader = styled.tr`
 
 export const TableHeaderCell = styled.th`
   cursor: pointer;
+  text-align: left;
   border-bottom: 1px solid ${(props) => props.theme.colors.tableBorder};
 `;
 
 export const TableBody = styled.tbody`
   font-size: ${(props) => props.theme.fontSizes.tableBody};
-  background-color: ${(props) => props.theme.colors.tableBg1};
   color: ${(props) => props.theme.colors.tableBodyText};
 `;
 
 export const TableRow = styled.tr`
   height: 1.5rem;
   background-color: ${(props) =>
-    props.isEvenIndex ? props.theme.colors.tableHoverBg : "white"};
+    props.isEvenIndex
+      ? props.theme.colors.tableRowBg1
+      : props.theme.colors.tableRowBg2};
+  td {
+    padding-left: 5px;
+  }
   td:first-child {
-    background-color: red;
+    background-color: ${(props) =>
+      props.isEvenIndex
+        ? props.theme.colors.tableRowFirstCellBg1
+        : props.theme.colors.tableRowFirstCellBg2};
   }
   :hover {
-    background-color: ${(props) => props.theme.colors.tableHoverBg};
+    background-color: ${(props) => props.theme.colors.tableRowHoverBg};
+    color: white;
     td:first-child {
-      background-color: yellow;
+      background-color: ${(props) =>
+        props.theme.colors.tableRowFirstCellHoverBg};
     }
   }
 `;

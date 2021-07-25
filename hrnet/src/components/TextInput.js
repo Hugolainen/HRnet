@@ -1,20 +1,22 @@
 import React, { useState } from "react";
-import { Label, Input } from "../assets/Theme";
+import { Label, Input, InputContainer } from "../assets/Theme";
 
 // eslint-disable-next-line react/prop-types
-export const TextInput = ({ label, onSetInput }) => {
+export const TextInput = ({ label, type, onSetInput }) => {
   const [value, setValue] = useState("");
 
   return (
-    <>
+    <InputContainer>
       <Label htmlFor={label}>{label}</Label>
       <Input
-        type="text"
+        type={type}
         name={label}
         value={value}
-        onChange={(e) => setValue(e.target.value)}
-        onBlur={() => onSetInput(value)}
+        onChange={(e) => {
+          setValue(e.target.value);
+          onSetInput(e.target.value);
+        }}
       />
-    </>
+    </InputContainer>
   );
 };
