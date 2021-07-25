@@ -96,7 +96,7 @@ export const CreateEmployeeContainer = styled.div`
   max-width: ${(props) => props.theme.containerSizes.form};
   width: 100%;
   height: 100%;
-  margin-top: 2rem;
+  margin-top: 1rem;
   padding-left: 1em;
   padding-right: 1em;
 `;
@@ -106,7 +106,7 @@ export const CurrentEmployeeContainer = styled.div`
   flex-direction: column;
   width: ${(props) => props.theme.containerSizes.table};
   height: 100%;
-  margin-top: 2rem;
+  margin-top: 1rem;
   padding-left: 1em;
   padding-right: 1em;
 `;
@@ -255,5 +255,35 @@ export const TableRow = styled.tr`
       background-color: ${(props) =>
         props.theme.colors.tableRowFirstCellHoverBg};
     }
+  }
+`;
+
+/*
+ * Table aside
+ */
+export const TableAsideItemContainer = styled.div`
+  display: flex;
+  gap: 10px;
+  margin: 10px 0;
+`;
+
+export const TableNavButton = styled.button`
+  cursor: ${(props) => (props.isDisabled ? "default" : "pointer")};
+  display: ${(props) => (props.isDisabled ? "none" : "block")};
+  font-weight: bold;
+  border-radius: 5px;
+  padding: 10px;
+  min-width: 40px;
+  background-color: ${(props) =>
+    props.isActive ? props.theme.colors.tableBorder : "transparent"};
+  }
+  border: ${(props) => (props.isActive ? "1 solid grey" : "0")};
+  color: ${(props) =>
+    props.isActive ? "white" : props.theme.colors.tableBodyText};
+
+  :hover {
+    background-color: ${(props) => props.theme.colors.tableBorder};
+    color: white;
+    outline: 0;
   }
 `;

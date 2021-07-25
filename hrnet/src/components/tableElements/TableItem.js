@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from "react";
-import { TableRow } from "../assets/Theme";
+import { TableRow } from "../../assets/Theme";
 
 // eslint-disable-next-line react/prop-types
 export const TableItem = ({ employee }) => {

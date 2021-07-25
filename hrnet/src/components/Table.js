@@ -7,14 +7,20 @@ import {
   TableHeader,
   TableHeaderCell,
   TableBody,
+  styled,
 } from "../assets/Theme";
-import { TableItem } from "./TableItem";
+import { TableItem } from "./tableElements/TableItem";
+import { EntryAmmountSelectInput } from "./tableElements/EntryAmmountSelectInput.js";
+import { Searchbar } from "./tableElements/SearchBar";
+import { EntriesInfo } from "./tableElements/EntriesInfo";
+import { TablePageNavigation } from "./tableElements/TablePageNavigation";
 
 // eslint-disable-next-line react/prop-types
 export const Table = (employeeList) => {
   const [sorting, setSorting] = useState();
-  const [filter, setFilter] = useState();
-  const [maxEntryNumber, setMaxEntryNumber] = useState();
+  const [filter, setFilter] = useState([]);
+  const [maxEntryNumber, setMaxEntryNumber] = useState(10);
+  const [startIndex, setStartIndex] = useState(0);
 
   const children = employeeList.employeeList.length
     ? employeeList.employeeList
@@ -26,6 +32,12 @@ export const Table = (employeeList) => {
     : [];
   return (
     <TableContainer>
+      <TableAside>
+        <EntryAmmountSelectInput
+          onSetInput={(value) => setMaxEntryNumber(value)}
+        />
+        <Searchbar onSetInput={(value) => setFilter(value)} />
+      </TableAside>
       <StyledTable>
         <TableHeader>
           <tr>
@@ -42,6 +54,25 @@ export const Table = (employeeList) => {
         </TableHeader>
         <TableBody>{children}</TableBody>
       </StyledTable>
+      <TableAside>
+        <EntriesInfo
+          maxEntriesAmmout={maxEntryNumber}
+          startIndex={startIndex}
+          employeeListLength={children.length}
+          isFiltered={filter.length ? true : false}
+          filteredListLength={children.length}
+        />
+        <TablePageNavigation
+          maxEntriesAmmout={maxEntryNumber}
+          listLength={children.length}
+          onSetPage={(value) => setStartIndex(value * maxEntryNumber)}
+        />
+      </TableAside>
     </TableContainer>
   );
 };
+
+const TableAside = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
