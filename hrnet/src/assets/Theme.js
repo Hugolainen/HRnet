@@ -135,7 +135,8 @@ export const SubTitle = styled.h2`
 
 export const NavLink = styled(Link)`
   color: ${(props) => props.theme.colors.textLink};
-  text-align: center;
+  margin: auto;
+  width: fit-content;
   text-decoration: underline;
   cursor: pointer;
   :hover {

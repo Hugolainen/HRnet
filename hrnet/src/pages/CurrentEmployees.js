@@ -5,9 +5,11 @@ import { Table } from "../components/Table";
 export const CurrentEmployees = (employeeList) => {
   return (
     <CurrentEmployeeContainer>
-      <PageTitle>HRnet</PageTitle>
+      <PageTitle>Current Employees</PageTitle>
       <Table employeeList={employeeList.employeeList} />
-      <NavLink to="/"> Home </NavLink>
+      <NavLink to="/">
+        <i className="fas fa-home"></i> Home
+      </NavLink>
     </CurrentEmployeeContainer>
   );
 };

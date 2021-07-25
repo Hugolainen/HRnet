@@ -21,7 +21,9 @@ export const CreateEmployee = ({ createNewEmployee }) => {
   return (
     <CreateEmployeeContainer>
       <PageTitle>HRnet</PageTitle>
-      <NavLink to="/list"> View Current Employees </NavLink>
+      <NavLink to="/list">
+        <i className="fas fa-scroll"></i> View Current Employees
+      </NavLink>
       <SubTitle> Create Employee </SubTitle>
       <TextInput
         label="First Name"
