@@ -4,8 +4,6 @@ import React, { useState } from "react";
 import {
   TableContainer,
   StyledTable,
-  TableHeader,
-  TableHeaderCell,
   TableBody,
   styled,
 } from "../assets/Theme";
@@ -14,17 +12,81 @@ import { EntryAmmountSelectInput } from "./tableElements/EntryAmmountSelectInput
 import { Searchbar } from "./tableElements/SearchBar";
 import { EntriesInfo } from "./tableElements/EntriesInfo";
 import { TablePageNavigation } from "./tableElements/TablePageNavigation";
+import { TableHeader } from "./tableElements/TableHeader";
+
+import { employeeAttributeList } from "../assets/data/employeeAttributeList";
+
+function filter(employee, word) {
+  let res = false;
+  Object.keys(employee).some((key) => {
+    if (key !== "id") {
+      if (employee[key].toLowerCase().includes(word)) {
+        res = true;
+      }
+    }
+  });
+  return res;
+}
+
+function itemMatchesFilter(employee, searchedWords) {
+  let res = false;
+
+  for (const word of searchedWords) {
+    res = filter(employee, word);
+    if (res === false) return false;
+  }
+  return res;
+}
 
 // eslint-disable-next-line react/prop-types
 export const Table = (employeeList) => {
-  const [sorting, setSorting] = useState();
   const [filter, setFilter] = useState([]);
+  const [sorterAtttribute, setSorterAtttribute] = useState("firstName");
+  const [sorterOrder, setSorterOrder] = useState(true);
   const [maxEntryNumber, setMaxEntryNumber] = useState(10);
   const [startIndex, setStartIndex] = useState(0);
+
+  const filterTester = employeeList.employeeList.length
+    ? employeeList.employeeList.filter((employee) =>
+        itemMatchesFilter(employee, filter)
+      )
+    : [];
+
+  const sorterTester = employeeList.employeeList.length
+    ? employeeList.employeeList.sort(function (a, b) {
+        var textA = a[sorterAtttribute].toLowerCase();
+        var textB = b[sorterAtttribute].toLowerCase();
+        return sorterOrder
+          ? textA < textB
+            ? -1
+            : textA > textB
+            ? 1
+            : 0
+          : textA < textB
+          ? 1
+          : textA > textB
+          ? -1
+          : 0;
+      })
+    : [];
+
+  const slicerTester = employeeList.employeeList.length
+    ? employeeList.employeeList.filter((employee) =>
+        itemMatchesFilter(employee, filter)
+      )
+    : [];
+  console.log(slicerTester);
+
+  const onUpdateSorting = (sortingAttribute, sortingOrder) => {
+    setSorterAtttribute(sortingAttribute);
+    setSorterOrder(sortingOrder);
+  };
 
   const children = employeeList.employeeList.length
     ? employeeList.employeeList
         //.filter(pot => itemMatchesFilter(pot, potStatusFilter, slagStatusFilter, slagTypeFilter))  //Keep as template
+        //.sort
+        //.slice
         .map((employee) => (
           // eslint-disable-next-line react/jsx-key
           <TableItem key={employee.id} employee={employee} />
@@ -39,19 +101,10 @@ export const Table = (employeeList) => {
         <Searchbar onSetInput={(value) => setFilter(value)} />
       </TableAside>
       <StyledTable>
-        <TableHeader>
-          <tr>
-            <TableHeaderCell>First Name</TableHeaderCell>
-            <TableHeaderCell>Last Name</TableHeaderCell>
-            <TableHeaderCell>Start Date</TableHeaderCell>
-            <TableHeaderCell>Department</TableHeaderCell>
-            <TableHeaderCell>Date of Birth</TableHeaderCell>
-            <TableHeaderCell>Street</TableHeaderCell>
-            <TableHeaderCell>City</TableHeaderCell>
-            <TableHeaderCell>State</TableHeaderCell>
-            <TableHeaderCell>Zip Code</TableHeaderCell>
-          </tr>
-        </TableHeader>
+        <TableHeader
+          attributes={employeeAttributeList}
+          onUpdateSorting={onUpdateSorting}
+        />
         <TableBody>{children}</TableBody>
       </StyledTable>
       <TableAside>

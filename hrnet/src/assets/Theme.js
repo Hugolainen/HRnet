@@ -215,7 +215,7 @@ export const StyledTable = styled.table`
   border-spacing: 0px;
 `;
 
-export const TableHeader = styled.thead`
+export const ScTableHeader = styled.thead`
   font-size: ${(props) => props.theme.fontSizes.tableHeader};
   color: ${(props) => props.theme.colors.tableHeaderText};
   background-color: white;
@@ -225,6 +225,8 @@ export const TableHeader = styled.thead`
 export const TableHeaderCell = styled.th`
   cursor: pointer;
   text-align: left;
+  color: ${(props) =>
+    props.isSorter ? "grey" : props.theme.colors.tableHeaderText};
   border-bottom: 1px solid ${(props) => props.theme.colors.tableBorder};
 `;
 
