@@ -39,19 +39,16 @@ function itemMatchesFilter(employee, searchedWords) {
 }
 
 function listSorting(a, b, attribute, order) {
-  var textA = a[attribute].toLowerCase();
-  var textB = b[attribute].toLowerCase();
-  return order
-    ? textA < textB
-      ? -1
-      : textA > textB
-      ? 1
-      : 0
-    : textA < textB
-    ? 1
-    : textA > textB
-    ? -1
-    : 0;
+  const textA = a[attribute].toLowerCase();
+  const textB = b[attribute].toLowerCase();
+  var res;
+  if (textA === "" || textB === "") {
+    // Empty valued items will always be at the end
+    return textA === "" ? (textB === "" ? 0 : 1) : -1;
+  } else {
+    res = textA < textB ? -1 : textA > textB ? 1 : 0;
+  }
+  return res === 0 ? res : order ? res : -res;
 }
 
 // eslint-disable-next-line react/prop-types
@@ -78,7 +75,7 @@ export const Table = (employeeList) => {
   const slicerTester = employeeList.employeeList.length
     ? employeeList.employeeList.slice(startIndex, +startIndex + +maxEntryNumber)
     : [];
-  console.log(slicerTester);
+  //console.log(slicerTester);
 
   const onUpdateSorting = (sortingAttribute, sortingOrder) => {
     setSorterAtttribute(sortingAttribute);
