@@ -52,17 +52,15 @@ function listSorting(a, b, attribute, order) {
 }
 
 // eslint-disable-next-line react/prop-types
-export const Table = (employeeList) => {
+export const Table = ({ employeeList }) => {
   const [filter, setFilter] = useState([""]);
   const [sorterAtttribute, setSorterAtttribute] = useState("firstName");
   const [sorterOrder, setSorterOrder] = useState(true);
   const [maxEntryNumber, setMaxEntryNumber] = useState(10);
   const [startIndex, setStartIndex] = useState(0);
 
-  const filteredEmployeeList = employeeList.employeeList.length
-    ? employeeList.employeeList.filter((employee) =>
-        listFiltering(employee, filter)
-      )
+  const filteredEmployeeList = employeeList.length
+    ? employeeList.filter((employee) => listFiltering(employee, filter))
     : [];
 
   const onUpdateSorting = (sortingAttribute, sortingOrder) => {
@@ -101,7 +99,7 @@ export const Table = (employeeList) => {
         <EntriesInfo
           maxEntriesAmmout={maxEntryNumber}
           startIndex={startIndex}
-          employeeListLength={employeeList.employeeList.length}
+          employeeListLength={employeeList.length}
           isFiltered={filter.length && filter[0] !== "" ? true : false}
           filteredListLength={filteredEmployeeList.length}
         />
