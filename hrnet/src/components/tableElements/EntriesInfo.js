@@ -9,7 +9,13 @@ export const EntriesInfo = ({
   isFiltered,
   filteredListLength,
 }) => {
-  const startIndexText = employeeListLength === 0 ? 0 : startIndex + 1;
+  const startIndexText = isFiltered
+    ? filteredListLength === 0
+      ? 0
+      : startIndex + 1
+    : employeeListLength === 0
+    ? 0
+    : startIndex + 1;
   const ammountOfEntries = isFiltered ? filteredListLength : employeeListLength;
   const endIndexText =
     +startIndex + +maxEntriesAmmout >= ammountOfEntries
