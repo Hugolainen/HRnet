@@ -5,7 +5,7 @@ import {
   TableContainer,
   StyledTable,
   TableBody,
-  styled,
+  TableAside,
 } from "../assets/Theme";
 import { TableItem } from "./tableElements/TableItem";
 import { EntryAmmountSelectInput } from "./tableElements/EntryAmmountSelectInput.js";
@@ -16,11 +16,11 @@ import { TableHeader } from "./tableElements/TableHeader";
 
 import { employeeAttributeList } from "../assets/data/employeeAttributeList";
 
-function filter(employee, word) {
+function itemMatchesFilter(employee, word) {
   let res = false;
   Object.keys(employee).some((key) => {
     if (key !== "id") {
-      if (employee[key].toLowerCase().includes(word)) {
+      if (employee[key].toLowerCase().includes(word.toLowerCase())) {
         res = true;
       }
     }
@@ -28,11 +28,11 @@ function filter(employee, word) {
   return res;
 }
 
-function itemMatchesFilter(employee, searchedWords) {
+function listFiltering(employee, searchedWords) {
   let res = false;
 
   for (const word of searchedWords) {
-    res = filter(employee, word);
+    res = itemMatchesFilter(employee, word);
     if (res === false) return false;
   }
   return res;
@@ -53,40 +53,30 @@ function listSorting(a, b, attribute, order) {
 
 // eslint-disable-next-line react/prop-types
 export const Table = (employeeList) => {
-  const [filter, setFilter] = useState([]);
+  const [filter, setFilter] = useState([""]);
   const [sorterAtttribute, setSorterAtttribute] = useState("firstName");
   const [sorterOrder, setSorterOrder] = useState(true);
   const [maxEntryNumber, setMaxEntryNumber] = useState(10);
   const [startIndex, setStartIndex] = useState(0);
 
-  const filterTester = employeeList.employeeList.length
+  const filteredEmployeeList = employeeList.employeeList.length
     ? employeeList.employeeList.filter((employee) =>
-        itemMatchesFilter(employee, filter)
+        listFiltering(employee, filter)
       )
     : [];
-
-  const sorterTester = employeeList.employeeList.length
-    ? employeeList.employeeList.sort(function (a, b) {
-        return listSorting(a, b, sorterAtttribute, sorterOrder);
-      })
-    : [];
-  //console.log(sorterTester);
-
-  const slicerTester = employeeList.employeeList.length
-    ? employeeList.employeeList.slice(startIndex, +startIndex + +maxEntryNumber)
-    : [];
-  //console.log(slicerTester);
 
   const onUpdateSorting = (sortingAttribute, sortingOrder) => {
     setSorterAtttribute(sortingAttribute);
     setSorterOrder(sortingOrder);
   };
 
-  const children = employeeList.employeeList.length
-    ? employeeList.employeeList
-        //.filter(pot => itemMatchesFilter(pot, potStatusFilter, slagStatusFilter, slagTypeFilter))  //Keep as template
-        //.sort
-        //.slice
+  const children = filteredEmployeeList.length
+    ? filteredEmployeeList
+        .filter((employee) => listFiltering(employee, filter))
+        .sort(function (a, b) {
+          return listSorting(a, b, sorterAtttribute, sorterOrder);
+        })
+        .slice(startIndex, +startIndex + +maxEntryNumber)
         .map((employee) => (
           // eslint-disable-next-line react/jsx-key
           <TableItem key={employee.id} employee={employee} />
@@ -111,21 +101,16 @@ export const Table = (employeeList) => {
         <EntriesInfo
           maxEntriesAmmout={maxEntryNumber}
           startIndex={startIndex}
-          employeeListLength={children.length}
-          isFiltered={filter.length ? true : false}
-          filteredListLength={children.length}
+          employeeListLength={employeeList.employeeList.length}
+          isFiltered={filter.length && filter[0] !== "" ? true : false}
+          filteredListLength={filteredEmployeeList.length}
         />
         <TablePageNavigation
           maxEntriesAmmout={maxEntryNumber}
-          listLength={children.length}
+          listLength={filteredEmployeeList.length}
           onSetPage={(value) => setStartIndex(value * maxEntryNumber)}
         />
       </TableAside>
     </TableContainer>
   );
 };
-
-const TableAside = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;

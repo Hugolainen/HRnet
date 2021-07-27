@@ -8,16 +8,22 @@ export const TablePageNavigation = ({
   onSetPage,
 }) => {
   const [page, setPage] = useState(1);
+
   const ammountOfPage =
     listLength > maxEntriesAmmout
       ? Math.ceil(listLength / maxEntriesAmmout)
       : 1;
   const pageButtons = generatePageButtonList(ammountOfPage, page);
 
+  if (page > ammountOfPage) {
+    setPage(ammountOfPage);
+    onSetPage(ammountOfPage - 1);
+  }
+
   return (
     <TableAsideItemContainer>
       <TableNavButton
-        isDisabled={page === 1 ? true : false}
+        disabled={page === 1 ? true : false}
         onClick={() => {
           const prevPage = page > 1 ? page - 1 : page;
           setPage(prevPage);
@@ -29,11 +35,10 @@ export const TablePageNavigation = ({
 
       {pageButtons.map((value, index) => (
         <TableNavButton
+          disabled={value === "..." ? true : false}
           onClick={() => {
-            if (value !== "...") {
-              setPage(value);
-              onSetPage(value - 1);
-            }
+            setPage(value);
+            onSetPage(value - 1);
           }}
           isActive={value === page ? true : false}
           key={index + 1}
@@ -43,7 +48,7 @@ export const TablePageNavigation = ({
       ))}
 
       <TableNavButton
-        isDisabled={page === ammountOfPage ? true : false}
+        disabled={page === ammountOfPage ? true : false}
         onClick={() => {
           const nextPage = page < ammountOfPage ? page + 1 : page;
           setPage(nextPage);

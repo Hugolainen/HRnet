@@ -264,6 +264,11 @@ export const TableRow = styled.tr`
 /*
  * Table aside
  */
+export const TableAside = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
 export const TableAsideItemContainer = styled.div`
   display: flex;
   gap: 10px;

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { TableAsideItemContainer, Select } from "../../assets/Theme";
+import { TableAsideItemContainer, Select, styled } from "../../assets/Theme";
 
 // eslint-disable-next-line react/prop-types
 export const EntryAmmountSelectInput = ({ onSetInput }) => {
@@ -9,7 +9,7 @@ export const EntryAmmountSelectInput = ({ onSetInput }) => {
 
   return (
     <TableAsideItemContainer>
-      <span> Show </span>
+      <ScSpan> Show </ScSpan>
       <Select
         value={value}
         onInput={(e) => {
@@ -28,7 +28,11 @@ export const EntryAmmountSelectInput = ({ onSetInput }) => {
           })
         }
       </Select>
-      <span> entries </span>
+      <ScSpan> entries </ScSpan>
     </TableAsideItemContainer>
   );
 };
+
+const ScSpan = styled.span`
+  margin-top: 6px;
+`;

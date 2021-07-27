@@ -14,13 +14,13 @@ const App = () => {
       firstName: newEmployee.firstName ? newEmployee.firstName : "",
       lastName: newEmployee.lastName ? newEmployee.lastName : "",
       startDate: newEmployee.startDate ? newEmployee.startDate : "",
-      department: newEmployee.department ? newEmployee.department : "",
+      department: newEmployee.department ? newEmployee.department : "Sales",
       dateOfBirth: newEmployee.dateOfBirth ? newEmployee.dateOfBirth : "",
       street: newEmployee.street ? newEmployee.street : "",
       city: newEmployee.city ? newEmployee.city : "",
+      state: newEmployee.state ? newEmployee.state : "AL",
       zipCode: newEmployee.zipCode ? newEmployee.zipCode : "",
     };
-
     newList.push(employeeToCreate);
     setEmployeeList(newList);
   };

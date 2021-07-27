@@ -1,5 +1,10 @@
 import React, { useState } from "react";
-import { TableAsideItemContainer, Label, Input } from "../../assets/Theme";
+import {
+  TableAsideItemContainer,
+  Label,
+  Input,
+  styled,
+} from "../../assets/Theme";
 
 // eslint-disable-next-line react/prop-types
 export const Searchbar = ({ onSetInput }) => {
@@ -11,7 +16,7 @@ export const Searchbar = ({ onSetInput }) => {
 
   return (
     <TableAsideItemContainer>
-      <Label htmlFor="search"> Search: </Label>
+      <ScLabel htmlFor="search"> Search: </ScLabel>
       <Input
         type="text"
         name="search"
@@ -24,3 +29,7 @@ export const Searchbar = ({ onSetInput }) => {
     </TableAsideItemContainer>
   );
 };
+
+const ScLabel = styled(Label)`
+  margin-top: 6px;
+`;
