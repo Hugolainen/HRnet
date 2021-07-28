@@ -1,8 +1,7 @@
-/* eslint-disable react/prop-types */
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import { ScTableHeader, TableHeaderCell } from "../../assets/Theme";
 
-// eslint-disable-next-line react/prop-types
 export const TableHeader = ({ attributes, onUpdateSorting }) => {
   const [sorter, setSorter] = useState("firstName");
   const [order, setOrder] = useState(true);
@@ -44,4 +43,18 @@ export const TableHeader = ({ attributes, onUpdateSorting }) => {
       <tr>{children}</tr>
     </ScTableHeader>
   );
+};
+
+TableHeader.propTypes = {
+  attributes: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string,
+      value: PropTypes.string,
+    })
+  ),
+  onUpdateSorting: PropTypes.func,
+};
+
+TableHeader.defaultProps = {
+  attributes: ["firstName"],
 };

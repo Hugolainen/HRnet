@@ -1,8 +1,7 @@
-/* eslint-disable react/prop-types */
 import React from "react";
+import PropTypes from "prop-types";
 import { TableRow } from "../../assets/Theme";
 
-// eslint-disable-next-line react/prop-types
 export const TableItem = ({ employee }) => {
   return (
     <TableRow isEvenIndex={employee.id % 2 === 0 ? true : false}>
@@ -17,4 +16,23 @@ export const TableItem = ({ employee }) => {
       <td>{employee.zipCode}</td>
     </TableRow>
   );
+};
+
+TableItem.propTypes = {
+  employee: PropTypes.shape({
+    id: PropTypes.number,
+    firstName: PropTypes.string,
+    lastName: PropTypes.string,
+    startDate: PropTypes.string,
+    department: PropTypes.string,
+    dateOfBirth: PropTypes.string,
+    street: PropTypes.string,
+    city: PropTypes.string,
+    state: PropTypes.string,
+    zipCode: PropTypes.string,
+  }),
+};
+
+TableItem.defaultProps = {
+  employee: {},
 };

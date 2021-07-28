@@ -1,13 +1,21 @@
 import React from "react";
+import PropTypes from "prop-types";
 import styled from "styled-components";
 
-// eslint-disable-next-line react/prop-types
 export const ContentArea = ({ children }) => {
   return (
     <FullArea>
       <CenterArea>{children}</CenterArea>
     </FullArea>
   );
+};
+
+ContentArea.propTypes = {
+  children: PropTypes.element,
+};
+
+ContentArea.defaultProps = {
+  children: <div> default </div>,
 };
 
 const FullArea = styled.div`

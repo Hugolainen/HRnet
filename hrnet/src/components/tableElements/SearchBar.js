@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import {
   TableAsideItemContainer,
   Label,
@@ -6,7 +7,6 @@ import {
   styled,
 } from "../../assets/Theme";
 
-// eslint-disable-next-line react/prop-types
 export const Searchbar = ({ onSetInput }) => {
   const [value, setValue] = useState("");
 
@@ -28,6 +28,10 @@ export const Searchbar = ({ onSetInput }) => {
       />
     </TableAsideItemContainer>
   );
+};
+
+Searchbar.propTypes = {
+  onSetInput: PropTypes.func,
 };
 
 const ScLabel = styled(Label)`

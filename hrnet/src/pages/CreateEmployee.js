@@ -1,5 +1,5 @@
-/* eslint-disable no-unused-vars */
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 
 import {
   CreateEmployeeContainer,
@@ -14,7 +14,6 @@ import { InputCategory } from "../components/InputCategory";
 import { stateList } from "../assets/data/stateList";
 import { departmentList } from "../assets/data/departmentList";
 
-// eslint-disable-next-line react/prop-types
 export const CreateEmployee = ({ createNewEmployee }) => {
   const [newEmployee, setNewEmployee] = useState({});
 
@@ -95,4 +94,8 @@ export const CreateEmployee = ({ createNewEmployee }) => {
       <Button onClick={() => createNewEmployee(newEmployee)}>Save</Button>
     </CreateEmployeeContainer>
   );
+};
+
+CreateEmployee.propTypes = {
+  createNewEmployee: PropTypes.func,
 };

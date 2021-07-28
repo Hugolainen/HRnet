@@ -1,6 +1,24 @@
-/* eslint-disable react/prop-types */
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import { TableAsideItemContainer, TableNavButton } from "../../assets/Theme";
+
+const generatePageButtonList = (pageAmmount, actualPage) => {
+  if (pageAmmount <= 5) {
+    const res = [];
+    for (let i = 0; i < pageAmmount; i++) {
+      res.push(i + 1);
+    }
+    return res;
+  } else {
+    if (actualPage <= 2) {
+      return [1, 2, 3, "...", pageAmmount];
+    } else if (actualPage >= pageAmmount - 1) {
+      return [1, 2, "...", pageAmmount - 1, pageAmmount];
+    } else {
+      return [1, "...", actualPage, "...", pageAmmount];
+    }
+  }
+};
 
 export const TablePageNavigation = ({
   maxEntriesAmmout,
@@ -61,20 +79,13 @@ export const TablePageNavigation = ({
   );
 };
 
-const generatePageButtonList = (pageAmmount, actualPage) => {
-  if (pageAmmount <= 5) {
-    const res = [];
-    for (let i = 0; i < pageAmmount; i++) {
-      res.push(i + 1);
-    }
-    return res;
-  } else {
-    if (actualPage <= 2) {
-      return [1, 2, 3, "...", pageAmmount];
-    } else if (actualPage >= pageAmmount - 1) {
-      return [1, 2, "...", pageAmmount - 1, pageAmmount];
-    } else {
-      return [1, "...", actualPage, "...", pageAmmount];
-    }
-  }
+TablePageNavigation.propTypes = {
+  maxEntriesAmmout: PropTypes.number,
+  listLength: PropTypes.number,
+  onSetPage: PropTypes.func,
+};
+
+TablePageNavigation.defaultProps = {
+  maxEntriesAmmout: 10,
+  listLength: 0,
 };

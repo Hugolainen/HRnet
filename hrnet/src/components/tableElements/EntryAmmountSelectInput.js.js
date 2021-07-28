@@ -1,7 +1,7 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import { TableAsideItemContainer, Select, styled } from "../../assets/Theme";
 
-// eslint-disable-next-line react/prop-types
 export const EntryAmmountSelectInput = ({ onSetInput }) => {
   const [value, setValue] = useState(10);
 
@@ -17,20 +17,21 @@ export const EntryAmmountSelectInput = ({ onSetInput }) => {
           onSetInput(e.target.value);
         }}
       >
-        {
-          // eslint-disable-next-line react/prop-types
-          options.map((option) => {
-            return (
-              <option key={option} value={option}>
-                {option}
-              </option>
-            );
-          })
-        }
+        {options.map((option) => {
+          return (
+            <option key={option} value={option}>
+              {option}
+            </option>
+          );
+        })}
       </Select>
       <ScSpan> entries </ScSpan>
     </TableAsideItemContainer>
   );
+};
+
+EntryAmmountSelectInput.propTypes = {
+  onSetInput: PropTypes.func,
 };
 
 const ScSpan = styled.span`

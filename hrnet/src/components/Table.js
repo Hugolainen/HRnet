@@ -1,6 +1,6 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/prop-types */
 import React, { useState } from "react";
+import PropTypes from "prop-types";
+
 import {
   TableContainer,
   StyledTable,
@@ -51,7 +51,6 @@ function listSorting(a, b, attribute, order) {
   return res === 0 ? res : order ? res : -res;
 }
 
-// eslint-disable-next-line react/prop-types
 export const Table = ({ employeeList }) => {
   const [filter, setFilter] = useState([""]);
   const [sorterAtttribute, setSorterAtttribute] = useState("firstName");
@@ -75,10 +74,7 @@ export const Table = ({ employeeList }) => {
           return listSorting(a, b, sorterAtttribute, sorterOrder);
         })
         .slice(startIndex, +startIndex + +maxEntryNumber)
-        .map((employee) => (
-          // eslint-disable-next-line react/jsx-key
-          <TableItem key={employee.id} employee={employee} />
-        ))
+        .map((employee) => <TableItem key={employee.id} employee={employee} />)
     : [];
   return (
     <TableContainer>
@@ -111,4 +107,25 @@ export const Table = ({ employeeList }) => {
       </TableAside>
     </TableContainer>
   );
+};
+
+Table.propTypes = {
+  employeeList: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      firstName: PropTypes.string,
+      lastName: PropTypes.string,
+      startDate: PropTypes.string,
+      department: PropTypes.string,
+      dateOfBirth: PropTypes.string,
+      street: PropTypes.string,
+      city: PropTypes.string,
+      state: PropTypes.string,
+      zipCode: PropTypes.string,
+    })
+  ),
+};
+
+Table.defaultProps = {
+  employeeList: [],
 };

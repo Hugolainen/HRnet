@@ -1,5 +1,5 @@
-/* eslint-disable react/prop-types */
 import React from "react";
+import PropTypes from "prop-types";
 import { TableAsideItemContainer } from "../../assets/Theme";
 
 export const EntriesInfo = ({
@@ -33,4 +33,20 @@ export const EntriesInfo = ({
       )}
     </TableAsideItemContainer>
   );
+};
+
+EntriesInfo.propTypes = {
+  maxEntriesAmmout: PropTypes.number,
+  startIndex: PropTypes.number,
+  employeeListLength: PropTypes.number,
+  isFiltered: PropTypes.bool,
+  filteredListLength: PropTypes.number,
+};
+
+EntriesInfo.defaultProps = {
+  maxEntriesAmmout: 0,
+  startIndex: 0,
+  employeeListLength: 0,
+  isFiltered: false,
+  filteredListLength: 0,
 };

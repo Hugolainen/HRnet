@@ -204,6 +204,22 @@ export const Button = styled.button`
   }
 `;
 
+export const InputCategoryBorder = styled.div`
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  margin: 10px 0;
+  padding: 15px 10px 5px 10px;
+  border: 1px solid grey;
+`;
+
+export const InputCategoryTitle = styled.div`
+  position: absolute;
+  background-color: white;
+  top: -10px;
+`;
+
 /*
  * Table
  */

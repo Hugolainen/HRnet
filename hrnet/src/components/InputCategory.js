@@ -1,27 +1,21 @@
 import React from "react";
-import styled from "styled-components";
+import PropTypes from "prop-types";
+import { InputCategoryBorder, InputCategoryTitle } from "../assets/Theme";
 
-// eslint-disable-next-line react/prop-types
 export const InputCategory = ({ children, name }) => {
   return (
-    <CategoryBorder>
-      <CategoryTitle> {name} </CategoryTitle> {children}
-    </CategoryBorder>
+    <InputCategoryBorder>
+      <InputCategoryTitle> {name} </InputCategoryTitle> {children}
+    </InputCategoryBorder>
   );
 };
 
-const CategoryBorder = styled.div`
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  width: 100%;
-  margin: 10px 0;
-  padding: 15px 10px 5px 10px;
-  border: 1px solid grey;
-`;
+InputCategory.propTypes = {
+  children: PropTypes.arrayOf(PropTypes.element),
+  name: PropTypes.string,
+};
 
-const CategoryTitle = styled.div`
-  position: absolute;
-  background-color: white;
-  top: -10px;
-`;
+InputCategory.defaultProps = {
+  children: <div> default </div>,
+  name: "",
+};
