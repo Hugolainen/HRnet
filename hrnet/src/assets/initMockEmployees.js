@@ -1,6 +1,6 @@
 export const initEmployees = [
   {
-    id: "0",
+    id: 0,
     firstName: "Hugo",
     lastName: "Constant",
     startDate: "2021-05-03",
@@ -12,7 +12,7 @@ export const initEmployees = [
     zipCode: "42290",
   },
   {
-    id: "1",
+    id: 1,
     firstName: "Coline",
     lastName: "Constant",
     startDate: "2019-01-19",
@@ -24,7 +24,7 @@ export const initEmployees = [
     zipCode: "69003",
   },
   {
-    id: "2",
+    id: 2,
     firstName: "Achille",
     lastName: "Attila",
     startDate: "2020-11-05",
@@ -36,7 +36,7 @@ export const initEmployees = [
     zipCode: "59522",
   },
   {
-    id: "3",
+    id: 3,
     firstName: "Razy",
     lastName: "Alkabra",
     startDate: "2012-06-18",
@@ -48,7 +48,7 @@ export const initEmployees = [
     zipCode: "69001",
   },
   {
-    id: "4",
+    id: 4,
     firstName: "Emma",
     lastName: "Kurtis",
     startDate: "2021-05-04",
