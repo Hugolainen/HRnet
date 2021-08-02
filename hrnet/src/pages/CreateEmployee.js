@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Modal from "hrnet-modal";
 import PropTypes from "prop-types";
 
 import {
@@ -16,6 +17,9 @@ import { departmentList } from "../assets/data/departmentList";
 
 export const CreateEmployee = ({ createNewEmployee }) => {
   const [newEmployee, setNewEmployee] = useState({});
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  const toggleModal = () => setModalIsOpen(!modalIsOpen);
 
   return (
     <CreateEmployeeContainer>
@@ -87,11 +91,23 @@ export const CreateEmployee = ({ createNewEmployee }) => {
       <SelectInput
         label="Department"
         options={departmentList}
-        onSetInput={(value) => {
-          setNewEmployee({ ...newEmployee, department: value });
-        }}
+        onSetInput={(value) =>
+          setNewEmployee({ ...newEmployee, department: value })
+        }
       />
-      <Button onClick={() => createNewEmployee(newEmployee)}>Save</Button>
+      <Button
+        onClick={() => {
+          createNewEmployee(newEmployee);
+          toggleModal();
+        }}
+      >
+        Save
+      </Button>
+      <Modal
+        isOpen={modalIsOpen}
+        onConfirm={toggleModal}
+        message="Employee successfully created"
+      />
     </CreateEmployeeContainer>
   );
 };
