@@ -3,9 +3,10 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { CreateEmployee } from "./pages/CreateEmployee";
 import { CurrentEmployees } from "./pages/CurrentEmployees";
 import { ContentArea } from "./components/ContentArea";
+import { initEmployees } from "./assets/initMockEmployees";
 
 const App = () => {
-  const [employeeList, setEmployeeList] = useState([]);
+  const [employeeList, setEmployeeList] = useState(initEmployees);
 
   const onCreateNewEmployee = (newEmployee) => {
     const newList = employeeList;
